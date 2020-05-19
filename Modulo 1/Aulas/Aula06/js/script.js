@@ -35,3 +35,31 @@ resultado = a > b ? a + b : a - b;
 
 console.log('Resultado IF ternário: ' + resultado);
 
+//WHILE - DO WHILE - FOR
+var numeroAtual = 0;
+var somatorio = 0;
+
+//WHILE
+while (numeroAtual <= 10) {
+  somatorio += numeroAtual;
+  numeroAtual++;
+}
+console.log('Resultado while: ' + somatorio);
+
+//DO WHILE
+numeroAtual = 0;
+somatorio = 0;
+do {
+  somatorio += numeroAtual;
+  numeroAtual++;
+} while (numeroAtual <= 10);
+console.log('Resultado do while: ' + somatorio);
+
+//FOR
+numeroAtual = 0;
+somatorio = 0;
+for (numeroAtual = 0; numeroAtual <= 10; numeroAtual++) {
+  somatorio += numeroAtual;
+}
+
+console.log('Resultado for: ' + somatorio);
