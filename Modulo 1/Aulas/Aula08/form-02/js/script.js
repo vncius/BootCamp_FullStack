@@ -1,7 +1,8 @@
 window.addEventListener('load', start);
 
 function start() {
-  console.log('Página totalmente carregada');
+  console.log('Aula 08');
+  console.log('Tela totalmente Carregada');
 
   var nameInput = document.querySelector('#nameInput');
   nameInput.addEventListener('keyup', countName);
@@ -10,16 +11,14 @@ function start() {
   form.addEventListener('submit', preventSubmit);
 }
 
-function countName(event) {
+var countName = function (event) {
   var count = event.target.value;
-
   var span = document.querySelector('#nameLength');
   span.textContent = count.length;
-}
+};
 
-function preventSubmit(event) {
-  event.preventDefault();
-
+var preventSubmit = function (event) {
   var nameInput = document.querySelector('#nameInput');
-  alert(nameInput.value + ' cadastrado com sucesso!');
-}
+  event.preventDefault();
+  alert(nameInput.value + ' Cadastrado com sucesso');
+};
