@@ -1,0 +1,32 @@
+.container div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.container div {
+  vertical-align: center;
+  margin: 10px;
+}
+
+span {
+  float: left;
+  width: 100px;
+}
+
+.container div input:nth-child(2) {
+  width: 150px;
+  margin-right: 20px;
+}
+
+.container div input:nth-child(3) {
+  background-color: lightgray;
+  width: 70px;
+}
+
+.div-color {
+  width: 100px;
+  height: 100px;
+  margin-left: 130px;
+}
