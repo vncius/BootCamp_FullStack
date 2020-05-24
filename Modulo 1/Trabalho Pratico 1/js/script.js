@@ -1,53 +1,67 @@
-window.addEventListener('load', start);
+let obj = {};
 
-var range_red = null;
-var range_green = null;
-var range_blue = null;
-var input_red = null;
-var input_green = null;
-var input_blue = null;
-
-function start() {
+$(window).ready(() => {
   function mapElements() {
-    range_red = document.querySelector('#range-red');
-    input_red = document.querySelector('#input-value-red');
-    range_green = document.querySelector('#range-grenn');
-    input_green = document.querySelector('#input-value-grenn');
-    range_blue = document.querySelector('#range-blue');
-    input_blue = document.querySelector('#input-value-blue');
+    obj = new Object({
+      range_red: $('#range-red'),
+      range_green: $('#range-grenn'),
+      range_blue: $('#range-blue'),
+      input_red: $('#input-value-red'),
+      input_green: $('#input-value-grenn'),
+      input_blue: $('#input-value-blue'),
+      r: 0,
+      g: 0,
+      b: 0,
+      painel_color: $('.div-color'),
+      btn_reset: $('#reset'),
+    });
   }
 
   function createEvents() {
-    document.querySelector('#reset').addEventListener('click', reset);
-    range_red.oninput = atualizeDados;
-    range_green.oninput = atualizeDados;
-    range_blue.oninput = atualizeDados;
+    obj.btn_reset.click(reset);
+    obj.range_red.on('input', atualizeDados);
+    obj.range_green.on('input', atualizeDados);
+    obj.range_blue.on('input', atualizeDados);
   }
 
   mapElements();
   createEvents();
-  atualizeDados();
-}
+  reset();
+});
 
-function reset() {
-  range_red.value = 0;
-  range_green.value = 0;
-  range_blue.value = 0;
-  atualizeDados();
-}
+const atualizeDados = (event) => {
+  const value = event.target.value;
+  const id = event.target.id;
 
-function atualizeDados() {
-  atualizeInput(range_red.value, range_green.value, range_blue.value);
-  atualizeRGB(range_red.value, range_green.value, range_blue.value);
-}
+  switch (id) {
+    case 'range-red':
+      obj.r = value;
+      break;
+    case 'range-grenn':
+      obj.g = value;
+      break;
+    case 'range-blue':
+      obj.b = value;
+      break;
+  }
+  sync();
+};
 
-function atualizeInput(r, g, b) {
-  input_red.value = r;
-  input_green.value = g;
-  input_blue.value = b;
-}
+const sync = () => {
+  obj.range_red.val(obj.r);
+  obj.range_green.val(obj.g);
+  obj.range_blue.val(obj.b);
 
-function atualizeRGB(r, g, b) {
-  var painel_color = document.querySelector('.div-color');
-  painel_color.style.background = 'rgb(' + r + ', ' + g + ', ' + b + ')';
-}
+  obj.input_red.val(obj.r);
+  obj.input_green.val(obj.g);
+  obj.input_blue.val(obj.b);
+
+  obj.painel_color.css('background', `rgb(${obj.r},${obj.g},${obj.b})`);
+};
+
+const reset = () => {
+  obj.r = 0;
+  obj.g = 0;
+  obj.b = 0;
+  sync();
+};
