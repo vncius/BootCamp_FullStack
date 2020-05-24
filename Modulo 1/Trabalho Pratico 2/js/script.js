@@ -71,6 +71,10 @@ const pesquisar = () => {
 
 const preenchaListaComUsuarios = () => {
   limpeDados();
+  usuariosExibidos = usuariosExibidos.sort((a, b) => {
+    return a.nome.localeCompare(b.nome);
+  });
+
   let listaUL = '<ul class="list-group list-group-flush">';
   usuariosExibidos.forEach((usuario) => {
     const { id, nome, urlImage, nascimento, idade } = usuario;
