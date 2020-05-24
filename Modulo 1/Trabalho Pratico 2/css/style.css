@@ -1,0 +1,34 @@
+.row {
+  margin: 10px;
+}
+
+.card-header {
+  font-size: 18px;
+  font-weight: bolder;
+}
+
+ul li span {
+  font-weight: bolder;
+}
+
+img {
+  margin-right: 15px;
+  border-radius: 50%;
+  width: 60px;
+}
+
+#divUsuariosEncontrados li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.tituloPagina {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#btnPesquisar {
+  width: 100%;
+}
