@@ -10,8 +10,9 @@ app.get('/', async (req, res) => {
     //console.log(await obtenhaQuatidadeDeCidadesPorEstado('GO'));
     //console.log(await obtenhaTop5MaisCidades(true));
     //console.log(await obtenhaTop5MaisCidades(false));
-    //console.log(await obtenhaCidadesComMaiorNome());
-    res.send(await obtenhaCidadesComMaiorNome());
+    //console.log(await obtenhaCidadesComMaiorNome(true));
+    //console.log(await obtenhaCidadesComMaiorNome(false));
+    res.send(await obtenhaCidadesOrdenadasPorNome(true));
     res.end();
   } catch (error) {
     res.send({ erro: error });
@@ -36,7 +37,7 @@ const init = async () => {
   }
 };
 
-const obtenhaCidadesComMaiorNome = async () => {
+const obtenhaCidadesOrdenadasPorNome = async (maiorNome) => {
   const allStates = await leiaArquivo(global.nameFileAllStates);
   let allCities = [];
 
@@ -47,8 +48,12 @@ const obtenhaCidadesComMaiorNome = async () => {
   });
 
   return allCities.sort((a, b) => {
-    if (b.nome.length - a.nome.length !== 0) {
-      return b.nome.length - a.nome.lenddgth;
+    let proposicao = b.nome.length - a.nome.length !== 0;
+
+    if (proposicao && maiorNome) {
+      return b.nome.length - a.nome.length;
+    } else if (proposicao && !maiorNome) {
+      return a.nome.length - b.nome.length;
     }
     return a.nome.localeCompare(b.nome);
   });
