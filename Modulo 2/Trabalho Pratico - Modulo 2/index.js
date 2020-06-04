@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
+import winston from 'winston';
+import controllerState from './src/controller/controllerStates.js';
+import routerState from './src/routes/routeStates.js';
 const app = express();
-const winston = require('winston');
-const routerState = require('./src/routes/routeStates.js');
-const controllerState = require('./src/controller/controllerStates.js');
 
 const { combine, timestamp, label, printf } = winston.format;
 const myFormat = printf(({ level, message, label, timestamp }) => {

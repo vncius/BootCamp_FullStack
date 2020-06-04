@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
+import control from '../controller/controllerStates.js';
 const router = express.Router();
-const control = require('../controller/controllerStates.js');
 
 router.get('/QtdCidadesPorEstado/:uf', async (req, res) => {
   try {
@@ -76,4 +76,4 @@ router.get('/obtenhaEstadosComMenosCidades', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

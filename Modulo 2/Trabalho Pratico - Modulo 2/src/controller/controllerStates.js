@@ -1,4 +1,6 @@
-const fs = require('fs').promises;
+import { promises } from 'fs';
+const fs = promises;
+
 global.dirStates = 'Estados';
 global.nameFileAllStates = 'allStates.json';
 
@@ -148,8 +150,16 @@ const leiaArquivo = async (nome) => {
   }
 };
 
-exports.init = init;
-exports.obtenhaEstadosENomesDeCidades = obtenhaCidadePorEstadoPorRegra;
-exports.obtenhaQuatidadeDeCidadesPorEstado = obtenhaQuatidadeDeCidadesPorEstado;
-exports.obtenhaTop5Estados = obtenhaTop5Estados;
-exports.obtenhaCidadesOrdenadasPorNome = obtenhaCidadesOrdenadasPorNome;
+export default {
+  init,
+  obtenhaCidadePorEstadoPorRegra,
+  obtenhaQuatidadeDeCidadesPorEstado,
+  obtenhaTop5Estados,
+  obtenhaCidadesOrdenadasPorNome,
+};
+
+// exports.init = init;
+// exports.obtenhaEstadosENomesDeCidades = obtenhaCidadePorEstadoPorRegra;
+// exports.obtenhaQuatidadeDeCidadesPorEstado = obtenhaQuatidadeDeCidadesPorEstado;
+// exports.obtenhaTop5Estados = obtenhaTop5Estados;
+// exports.obtenhaCidadesOrdenadasPorNome = obtenhaCidadesOrdenadasPorNome;
