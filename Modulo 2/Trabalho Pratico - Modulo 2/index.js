@@ -2,7 +2,11 @@ import express from 'express';
 import winston from 'winston';
 import controllerState from './src/controller/controllerStates.js';
 import routerState from './src/routes/routeStates.js';
+import cors from 'cors';
 const app = express();
+
+app.use(cors);
+app.use(express.json);
 
 const { combine, timestamp, label, printf } = winston.format;
 const myFormat = printf(({ level, message, label, timestamp }) => {
