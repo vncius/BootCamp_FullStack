@@ -4,7 +4,7 @@ const fs = promises;
 const crie = async (aluno) => {
   try {
     const { student, subject, type, value } = aluno;
-    let allGrades = await obtenhaGrades();
+    let allGrades = await leiaArquivoJSON();
     const registro = {
       id: allGrades.nextId++,
       student: student,
@@ -14,8 +14,53 @@ const crie = async (aluno) => {
       timestamp: new Date(),
     };
     allGrades.grades.push(registro);
-    registreGrades(allGrades);
+    graveArquivoJSON(allGrades);
     return registro;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const atualize = async (aluno) => {
+  try {
+    const { id, student, subject, type, value } = aluno;
+    let allGrades = await leiaArquivoJSON();
+    let registroEncontrado = false;
+
+    allGrades.grades.forEach((grade) => {
+      if (grade.id === id) {
+        grade.student = student;
+        grade.subject = subject;
+        grade.type = type;
+        grade.value = value;
+        registroEncontrado = grade;
+      }
+    });
+
+    if (!registroEncontrado) {
+      throw new Error('Grade não encontrado para atualização');
+    }
+
+    graveArquivoJSON(allGrades);
+    return registroEncontrado;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteAluno = async (id) => {
+  try {
+    let allGrades = await leiaArquivoJSON();
+    const encontrado = allGrades.grades.find((x) => x.id === parseInt(id));
+
+    if (!encontrado) {
+      throw new Error('Grade não encontrado para deleção');
+    }
+
+    allGrades.grades = allGrades.grades.filter((x) => x.id !== parseInt(id));
+
+    graveArquivoJSON(allGrades);
+    return { status: 'DELETED', ...encontrado };
   } catch (error) {
     throw error;
   }
@@ -23,13 +68,9 @@ const crie = async (aluno) => {
 
 const obtenha = async (id) => {};
 
-const atualize = async (aluno) => {};
-
-const deleteAluno = async (id) => {};
-
 export default { crie, obtenha, atualize, deleteAluno };
 
-const registreGrades = async (grades) => {
+const graveArquivoJSON = async (grades) => {
   try {
     return await fs.writeFile(
       './ArquivosJSON/grades.json',
@@ -41,7 +82,7 @@ const registreGrades = async (grades) => {
   }
 };
 
-const obtenhaGrades = async () => {
+const leiaArquivoJSON = async () => {
   try {
     return JSON.parse(await fs.readFile('./ArquivosJSON/grades.json', 'utf8'));
   } catch (error) {
