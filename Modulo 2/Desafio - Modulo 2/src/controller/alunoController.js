@@ -110,7 +110,34 @@ const obtenhaMedia = async (subject, type) => {
   }
 };
 
-export default { crie, atualize, obtenha, deleteAluno, obtenhaMedia };
+const obtenhaTop3 = async (subject, type) => {
+  try {
+    let allGrades = await leiaArquivoJSON();
+    const grades = allGrades.grades.filter(
+      (x) => x.subject === subject && x.type === type
+    );
+
+    if (grades.length <= 0) {
+      throw new Error(
+        `Não foi encontrado grades com os parametros informados Subject(${subject}) - Type(${type})`
+      );
+    }
+
+    const top3 = grades.sort((a, b) => b.value - a.value).slice(0, 3);
+    return { Subject: subject, Type: type, top3: top3 };
+  } catch (error) {
+    throw error;
+  }
+};
+
+export default {
+  crie,
+  atualize,
+  obtenha,
+  deleteAluno,
+  obtenhaMedia,
+  obtenhaTop3,
+};
 
 const graveArquivoJSON = async (grades) => {
   try {

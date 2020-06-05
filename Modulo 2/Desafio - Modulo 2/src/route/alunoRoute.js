@@ -53,6 +53,17 @@ router.get('/:subject/:type', async (req, res) => {
   }
 });
 
+router.get('/top3/:subject/:type', async (req, res) => {
+  try {
+    registreLog(true, req.ip, req.url, '');
+    const { subject, type } = req.params;
+    res.status(200).send(await controller.obtenhaTop3(subject, type));
+  } catch (err) {
+    registreLog(false, req.ip, req.url, err.message);
+    res.status(500).send({ error: err.message });
+  }
+});
+
 const registreLog = (ehInfo, ip, url, err) => {
   if (ehInfo) {
     logger.info(`Ip(${ip}) - Url(${url})`);
