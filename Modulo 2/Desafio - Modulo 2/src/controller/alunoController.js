@@ -54,7 +54,7 @@ const deleteAluno = async (id) => {
     const encontrado = allGrades.grades.find((x) => x.id === parseInt(id));
 
     if (!encontrado) {
-      throw new Error('Grade não encontrado para deleção');
+      throw new Error(`ID(${id}) Não encontrado`);
     }
 
     allGrades.grades = allGrades.grades.filter((x) => x.id !== parseInt(id));
@@ -66,7 +66,20 @@ const deleteAluno = async (id) => {
   }
 };
 
-const obtenha = async (id) => {};
+const obtenha = async (id) => {
+  try {
+    let allGrades = await leiaArquivoJSON();
+    const encontrado = allGrades.grades.find((x) => x.id === parseInt(id));
+
+    if (!encontrado) {
+      throw new Error(`ID(${id}) Não encontrado`);
+    }
+
+    return encontrado;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export default { crie, obtenha, atualize, deleteAluno };
 
