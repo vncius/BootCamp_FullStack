@@ -32,6 +32,17 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+router.get('/nota/:student/:subject', async (req, res) => {
+  try {
+    const { student, subject } = req.params;
+    registreLog(true, req.ip, req.url, '');
+    res.status(200).send(await controller.obtenhaNotaTotal(student, subject));
+  } catch (err) {
+    registreLog(false, req.ip, req.url, err.message);
+    res.status(500).send({ error: err.message });
+  }
+});
+
 router.get('/:id', async (req, res) => {
   try {
     registreLog(true, req.ip, req.url, '');

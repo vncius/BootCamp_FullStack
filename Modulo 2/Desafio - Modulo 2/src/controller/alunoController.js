@@ -81,6 +81,27 @@ const obtenha = async (id) => {
   }
 };
 
+const obtenhaNotaTotal = async (student, subject) => {
+  try {
+    let allGrades = await leiaArquivoJSON();
+    const grades = allGrades.grades.filter(
+      (x) => x.subject === subject && x.student === student
+    );
+
+    if (grades.length <= 0) {
+      throw new Error(ObtenhaMenssagemNaoEncontradoSubAndType(subject, type));
+    }
+
+    const sum = grades.reduce((acc, curr) => {
+      return acc + curr.value;
+    }, 0);
+
+    return { Student: student, Subject: subject, NotaTotal: sum };
+  } catch (error) {
+    throw error;
+  }
+};
+
 const obtenhaMedia = async (subject, type) => {
   try {
     let allGrades = await leiaArquivoJSON();
@@ -127,6 +148,7 @@ export default {
   deleteAluno,
   obtenhaMedia,
   obtenhaTop3,
+  obtenhaNotaTotal,
 };
 
 const graveArquivoJSON = async (grades) => {
