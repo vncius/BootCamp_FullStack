@@ -38,9 +38,7 @@ const atualize = async (aluno) => {
     });
 
     if (!registroEncontrado) {
-      throw new Error(
-        `Não foi encontrado grade com o parâmetro informados ID(${id})`
-      );
+      throw new Error(ObtenhaMenssagemNaoEncontradoID(id));
     }
 
     graveArquivoJSON(allGrades);
@@ -56,9 +54,7 @@ const deleteAluno = async (id) => {
     const encontrado = allGrades.grades.find((x) => x.id === parseInt(id));
 
     if (!encontrado) {
-      throw new Error(
-        `Não foi encontrado grade com o parâmetro informados ID(${id})`
-      );
+      throw new Error(ObtenhaMenssagemNaoEncontradoID(id));
     }
 
     allGrades.grades = allGrades.grades.filter((x) => x.id !== parseInt(id));
@@ -76,9 +72,7 @@ const obtenha = async (id) => {
     const encontrado = allGrades.grades.find((x) => x.id === parseInt(id));
 
     if (!encontrado) {
-      throw new Error(
-        `Não foi encontrado grade com o parâmetro informados ID(${id})`
-      );
+      throw new Error(ObtenhaMenssagemNaoEncontradoID(id));
     }
 
     return encontrado;
@@ -95,9 +89,7 @@ const obtenhaMedia = async (subject, type) => {
     );
 
     if (grades.length <= 0) {
-      throw new Error(
-        `Não foi encontrado grades com os parametros informados Subject(${subject}) - Type(${type})`
-      );
+      throw new Error(ObtenhaMenssagemNaoEncontradoSubAndType(subject, type));
     }
 
     const sum = grades.reduce((acc, curr) => {
@@ -118,9 +110,7 @@ const obtenhaTop3 = async (subject, type) => {
     );
 
     if (grades.length <= 0) {
-      throw new Error(
-        `Não foi encontrado grades com os parametros informados Subject(${subject}) - Type(${type})`
-      );
+      throw new Error(ObtenhaMenssagemNaoEncontradoSubAndType(subject, type));
     }
 
     const top3 = grades.sort((a, b) => b.value - a.value).slice(0, 3);
@@ -158,4 +148,12 @@ const leiaArquivoJSON = async () => {
     logger.error(`Function: (ObtenhaGrades) - ${error}`);
     throw error;
   }
+};
+
+const ObtenhaMenssagemNaoEncontradoSubAndType = (subject, type) => {
+  return `Não foi encontrado grades com os parâmetros informados - Subject(${subject}) - Type(${type})`;
+};
+
+const ObtenhaMenssagemNaoEncontradoID = (id) => {
+  return `Não foi encontrado grade com o parâmetro informados - ID(${id})`;
 };
