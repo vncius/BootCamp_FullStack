@@ -96,7 +96,7 @@ const obtenhaMedia = async (subject, type) => {
       return acc + curr.value;
     }, 0);
 
-    return { Media: sum, Subject: subject, Type: type };
+    return { Media: sum / grades.length, Subject: subject, Type: type };
   } catch (error) {
     throw error;
   }
