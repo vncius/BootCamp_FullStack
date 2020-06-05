@@ -38,7 +38,9 @@ const atualize = async (aluno) => {
     });
 
     if (!registroEncontrado) {
-      throw new Error('Grade não encontrado para atualização');
+      throw new Error(
+        `Não foi encontrado grade com o parâmetro informados ID(${id})`
+      );
     }
 
     graveArquivoJSON(allGrades);
@@ -54,7 +56,9 @@ const deleteAluno = async (id) => {
     const encontrado = allGrades.grades.find((x) => x.id === parseInt(id));
 
     if (!encontrado) {
-      throw new Error(`ID(${id}) Não encontrado`);
+      throw new Error(
+        `Não foi encontrado grade com o parâmetro informados ID(${id})`
+      );
     }
 
     allGrades.grades = allGrades.grades.filter((x) => x.id !== parseInt(id));
@@ -72,7 +76,9 @@ const obtenha = async (id) => {
     const encontrado = allGrades.grades.find((x) => x.id === parseInt(id));
 
     if (!encontrado) {
-      throw new Error(`ID(${id}) Não encontrado`);
+      throw new Error(
+        `Não foi encontrado grade com o parâmetro informados ID(${id})`
+      );
     }
 
     return encontrado;
@@ -81,7 +87,30 @@ const obtenha = async (id) => {
   }
 };
 
-export default { crie, obtenha, atualize, deleteAluno };
+const obtenhaMedia = async (subject, type) => {
+  try {
+    let allGrades = await leiaArquivoJSON();
+    const grades = allGrades.grades.filter(
+      (x) => x.subject === subject && x.type === type
+    );
+
+    if (grades.length <= 0) {
+      throw new Error(
+        `Não foi encontrado grades com os parametros informados Subject(${subject}) - Type(${type})`
+      );
+    }
+
+    const sum = grades.reduce((acc, curr) => {
+      return acc + curr.value;
+    }, 0);
+
+    return { Media: sum, Subject: subject, Type: type };
+  } catch (error) {
+    throw error;
+  }
+};
+
+export default { crie, atualize, obtenha, deleteAluno, obtenhaMedia };
 
 const graveArquivoJSON = async (grades) => {
   try {
