@@ -1,13 +1,22 @@
 import routerAluno from './src/route/alunoRoute.js';
+import { promises } from 'fs';
 import express from 'express';
 import winston from 'winston';
 import cors from 'cors';
 const app = express();
+const fs = promises;
+
 app.use(express.json());
 // ROTAS
 app.use('/aluno', routerAluno);
-app.get('/', (req, res) => {
-  res.send('ok');
+
+app.get('/', async (req, res) => {
+  const index = await fs.readFile('./index.html', 'utf8');
+  res.send(index);
+});
+
+app.get('*', (req, res) => {
+  res.send('<h1>Rota inexistente!<h1>');
 });
 
 app.use(cors);
@@ -28,6 +37,6 @@ global.logger = winston.createLogger({
   format: combine(label({ label: 'api' }), timestamp(), myFormat),
 });
 
-app.listen(3000, () => {
+app.listen(21153, () => {
   logger.info('Listerning at port 3000....');
 });
