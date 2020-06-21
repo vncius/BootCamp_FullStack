@@ -63,8 +63,7 @@
 <h2>Dicas</h2>
 <ul>
   <li>
-    A aplicação que implementei só possui uma variável em this.state 
-    fullSalary.
+    A aplicação que implementei só possui uma variável em this.state fullSalary.
   </li>
   <li>
     Isolei o cálculo do salário em um atributo de classe. O cálculo é feito em
@@ -84,3 +83,12 @@
     mostrar a barra horizontal).
   </li>
 </ul>
+
+<h2>Procedimento de instalação do projeto:</h2>
+<ul>
+  <li>1 - No diretório raiz do projeto execute o comando de instalação de depedências: <strong>yarn</strong></li>
+  <li>2 - No diretório raiz do projeto execute o comando de inicialização: <strong>yarn start</strong></li>
+</ul>
+
+<h2>Aplicação em execução</h2>
+<img src="https://user-images.githubusercontent.com/31490903/85227949-d2c88d80-b3b6-11ea-980a-79dc346362b9.gif">
