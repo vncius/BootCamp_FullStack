@@ -1,12 +1,12 @@
 <h1>Desafio Guiado 3</h1>
 <p>
-  <strong>Aplicação de votos em tempo real</strong>, com delay de 1s de
-  atualização
+  <strong>Projeto de listagem de votos em tempo real</strong>, com delay de 1 segundo de
+  atualização das informações.
 </p>
 
 <h2>Back-end</h2>
 <p>
-  Estrutura disponibilizadapelo professor Gomide pois o foco é no front-end em
+  Estrutura disponibilizada pelo professor Gomide pois o foco é no front-end em
   React
 </p>
 
