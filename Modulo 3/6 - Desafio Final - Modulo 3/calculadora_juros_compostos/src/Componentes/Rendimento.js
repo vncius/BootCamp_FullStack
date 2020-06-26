@@ -18,7 +18,7 @@ export default function Rendimento(props) {
           {totalAcumulado}
         </span>
         <span style={{ color: saldoNegativo ? 'red' : 'green' }}>
-          +{lucroAcumulado}
+          {saldoNegativo ? lucroAcumulado : `+ ${lucroAcumulado}`}
         </span>
         <span style={{ color: saldoNegativo ? 'red' : 'blue' }}>
           {percentualAcumulado} %
