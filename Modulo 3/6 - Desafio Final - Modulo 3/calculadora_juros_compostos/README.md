@@ -87,4 +87,4 @@ de <strong>0,8% ao mês</strong>, rende aproximadamente <strong>10,03%</strong> 
 
 <br/>
 <h2>Aplicação em execução</h2>
-<img src="https://user-images.githubusercontent.com/31490903/85907051-9cd83e80-b7e6-11ea-9eea-ffa2afbaecf4.gif">
+<img src="https://user-images.githubusercontent.com/31490903/85907563-4bc94a00-b7e8-11ea-8435-7a73d57d9137.gif">
