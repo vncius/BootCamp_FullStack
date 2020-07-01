@@ -1,6 +1,6 @@
 <h1>Trabalho Prático - Modulo 4</h1>
 <p>
-  <strong>API de controle bancário</strong>, realiza, depósito, consulta, transferências dentre outros procedimentos de praxe.
+  <strong>API de controle bancário</strong>, realiza depósito, consulta, transferências dentre outros procedimentos de praxe.
 </p>
 
 <h2>Back-end</h2>
